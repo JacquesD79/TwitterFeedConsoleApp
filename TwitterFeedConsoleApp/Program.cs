@@ -1,4 +1,5 @@
-﻿using Provider;
+﻿using Entities;
+using Provider;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,8 +13,17 @@ namespace TwitterFeedConsoleApp
         static void Main(string[] args)
         {
             FeedProvider _feedProvider = new FeedProvider();
-            var user = _feedProvider.GetUsers();
-            Console.WriteLine(user);
+            var users = _feedProvider.SetupUsersAndFollowers();
+            var sortedList = users.OrderBy(x => x.UserName).ToList();
+            foreach (User user in sortedList)
+            {
+                Console.WriteLine($"{user.UserName}");
+                foreach (Tweet tweet in user.Tweets)
+                {
+                    Console.WriteLine($"\t@{user.UserName}: {tweet.TweetFeed}");
+                }
+            }
+
             Console.ReadKey();
         }
     }

@@ -9,6 +9,6 @@ namespace Data
 {
     public interface IFeedData
     {
-        List<User> GetUsers();
+        List<User> SetupUsersAndFollowers();
     }
 }

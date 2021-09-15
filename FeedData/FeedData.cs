@@ -13,7 +13,7 @@ namespace Data
         string tweetFile = FileResource.tweet;
         string userFile = FileResource.user;
 
-        public List<User> GetUsers()
+        public List<User> SetupUsersAndFollowers()
         {
             List<User> _users = new List<User>();
             string[] _userFileLineSplitter = userFile.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
@@ -54,7 +54,7 @@ namespace Data
 
                             _user.Tweets = GetTweets(_user);
 
-                            //Get current users saved followers list to add more followers
+                            //Get current users saved followers list to add more followers to user
                             _user.Followers = _users.Where(x => x.UserName.Equals(name.Trim())).FirstOrDefault().Followers;
 
                             //Prevent duplicate followers and user cannot follow self

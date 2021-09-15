@@ -16,9 +16,9 @@ namespace Provider
             _feedData = new FeedData();
         }
 
-        public List<User> GetUsers()
+        public List<User> SetupUsersAndFollowers()
         {
-            return _feedData.GetUsers();
+            return _feedData.SetupUsersAndFollowers();
         }
 
     }
