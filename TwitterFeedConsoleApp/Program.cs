@@ -13,7 +13,6 @@ namespace TwitterFeedConsoleApp
         {
             FeedProvider _feedProvider = new FeedProvider();
             var user = _feedProvider.GetUsers();
-            _feedProvider.GetTweets();
             Console.WriteLine(user);
             Console.ReadKey();
         }

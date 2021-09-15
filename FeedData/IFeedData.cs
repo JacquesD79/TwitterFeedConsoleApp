@@ -9,8 +9,6 @@ namespace Data
 {
     public interface IFeedData
     {
-        List<User> ListUsers();
-        Dictionary<string, List<Follower>> GetUsers();
-        List<Tweet> GetTweets();
+        List<User> GetUsers();
     }
 }

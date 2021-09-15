@@ -8,7 +8,15 @@ namespace Entities
 {
     public class User
     {
+        public User()
+        {
+            Followers = new List<User>();
+            Tweets = new List<Tweet>();
+        }
+        public int Id { get; set; }
         public string UserName { get; set; }
-        public List<Follower> Followers { get; set; }
+        public List<User> Followers { get; set; }
+        public List<Tweet> Tweets { get; set; }
+
     }
 }
