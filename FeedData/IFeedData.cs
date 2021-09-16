@@ -10,5 +10,6 @@ namespace Data
     public interface IFeedData
     {
         List<User> SetupUsersAndFollowers();
+        List<Tweet> GetTweets(User user);
     }
 }

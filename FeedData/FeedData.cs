@@ -33,7 +33,6 @@ namespace Data
                             UserName = followerName,
                             Id = idCount++
                         };
-                        follower.Tweets = GetTweets(follower);
 
                         if (!_users.Any(x => x.UserName.Equals(follower.UserName))) // add user to dict with empty list
                         {
@@ -52,8 +51,6 @@ namespace Data
                                 _users.Add(_user);
                             }
 
-                            _user.Tweets = GetTweets(_user);
-
                             //Get current users saved followers list to add more followers to user
                             _user.Followers = _users.Where(x => x.UserName.Equals(name.Trim())).FirstOrDefault().Followers;
 
@@ -69,26 +66,37 @@ namespace Data
             return _users;
         }
 
-        private List<Tweet> GetTweets(User user)
+        public List<Tweet> GetTweets(User user)
         {
             string[] _tweetFileLineSplitter = tweetFile.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
             List<Tweet> tweets = new List<Tweet>();
+            bool didUserPostTweet = false;
 
             foreach (string _line in _tweetFileLineSplitter)
             {
-                string[] _tweetLineUserSplitter = _line.Split('>');
-
-                if (user.UserName.Equals(_tweetLineUserSplitter[0].Trim()))
+                try
                 {
-                    Tweet tweet = new Tweet()
+                    string[] _tweetLineUserSplitter = _line.Split('>');
+                    if (!string.IsNullOrWhiteSpace(_tweetLineUserSplitter[0]))
                     {
-                        TweetFeed = _tweetLineUserSplitter[1],
-                        User = user
-                    };
-                    tweets.Add(tweet);
+                        Tweet tweet = new Tweet()
+                        {
+                            TweetFeed = _tweetLineUserSplitter[1].Length <= 140 ? _tweetLineUserSplitter[1] : _tweetLineUserSplitter[1].Substring(0, 137) + "...",
+                            User = new User() { UserName = _tweetLineUserSplitter[0] }
+                        };
+                        tweets.Add(tweet);
+                    }
+                    if (user.UserName.Equals(_tweetLineUserSplitter[0].Trim()))
+                    {
+                        didUserPostTweet = true;
+                    }
+                }
+                catch
+                {
+                    return new List<Tweet>();
                 }
             }
-            return tweets;
+            return didUserPostTweet == true ? tweets : new List<Tweet>();
         }
 
     }

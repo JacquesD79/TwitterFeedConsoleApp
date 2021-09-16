@@ -16,10 +16,16 @@ namespace Provider
             _feedData = new FeedData();
         }
 
+        public List<Tweet> GetTweets(User user)
+        {
+            return _feedData.GetTweets(user);
+        }
+
         public List<User> SetupUsersAndFollowers()
         {
             return _feedData.SetupUsersAndFollowers();
         }
+
 
     }
 }

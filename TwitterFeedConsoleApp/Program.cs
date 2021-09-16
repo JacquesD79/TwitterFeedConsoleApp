@@ -15,12 +15,18 @@ namespace TwitterFeedConsoleApp
             FeedProvider _feedProvider = new FeedProvider();
             var users = _feedProvider.SetupUsersAndFollowers();
             var sortedList = users.OrderBy(x => x.UserName).ToList();
+
             foreach (User user in sortedList)
             {
+                user.Tweets = _feedProvider.GetTweets(user);
                 Console.WriteLine($"{user.UserName}");
+
                 foreach (Tweet tweet in user.Tweets)
                 {
-                    Console.WriteLine($"\t@{user.UserName}: {tweet.TweetFeed}");
+                    if (!user.Followers.Any(x => x.UserName.Equals(tweet.User.UserName)))
+                    {
+                        Console.WriteLine($"\t@{tweet.User.UserName}: {tweet.TweetFeed}");
+                    }
                 }
             }
 
