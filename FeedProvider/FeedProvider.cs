@@ -21,9 +21,9 @@ namespace Provider
             return _feedData.GetTweets(user);
         }
 
-        public List<User> SetupUsersAndFollowers()
+        public List<User> GetUsersAndFollowers()
         {
-            return _feedData.SetupUsersAndFollowers();
+            return _feedData.GetUsersAndFollowers();
         }
 
 

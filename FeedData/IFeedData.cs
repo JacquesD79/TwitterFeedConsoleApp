@@ -9,7 +9,7 @@ namespace Data
 {
     public interface IFeedData
     {
-        List<User> SetupUsersAndFollowers();
+        List<User> GetUsersAndFollowers();
         List<Tweet> GetTweets(User user);
     }
 }

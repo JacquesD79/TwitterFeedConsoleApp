@@ -47,7 +47,7 @@ namespace UnitTestProject
         [TestMethod]
         public void UsersInFile()
         {
-            bool usersExistInFile = _feedProvider.SetupUsersAndFollowers().Count > 0 ? true : false;
+            bool usersExistInFile = _feedProvider.GetUsersAndFollowers().Count > 0 ? true : false;
 
             Assert.IsTrue(usersExistInFile);
         }
